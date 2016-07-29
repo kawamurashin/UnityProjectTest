@@ -8,7 +8,7 @@ public class ModelManager : MonoBehaviour {
     public delegate void CallBack();
     private CallBack dataComplete;
     //
-    public XmlDocument document;// XMLオブジェクト
+    
     private List<ModelData> list;
     int imageCount;
     int imageTotal;
@@ -19,7 +19,7 @@ public class ModelManager : MonoBehaviour {
     private static ModelManager instace;
     private ModelManager()
     {
-        Debug.Log("modelmanager instance");
+
     }
     public static ModelManager Instance
     {
@@ -65,7 +65,7 @@ public class ModelManager : MonoBehaviour {
             XmlNode node;
 
             string text = www.text;
-            document = new XmlDocument();
+            XmlDocument document = new XmlDocument();
             document.LoadXml(text);
             //
             XmlNodeList nodelist = document.SelectNodes("data/cards/card");
@@ -83,7 +83,6 @@ public class ModelManager : MonoBehaviour {
 
                 list.Add(modelData);
             }
-
             loadImageStart();
         }
         else
@@ -94,7 +93,6 @@ public class ModelManager : MonoBehaviour {
     }
     private void loadImageStart()
     {
-        Debug.Log("loadImageStart");
         imageCount = 0;
         imageTotal = list.Count;
         for(int i=0; i < imageTotal; i++)
@@ -102,22 +100,26 @@ public class ModelManager : MonoBehaviour {
             ModelData modelData = list[i];
             StartCoroutine(loadImage(modelData));
         }
-        
     }
 
     IEnumerator loadImage(ModelData modelData)
     {
-       // string path = "file://" + Application.dataPath + "/Data/image/red.png";
         string path = "file://" + Application.dataPath + "/" +  modelData.Image;
         WWW www = new WWW(path);
 
         // 画像ダウンロード完了を待機
         yield return www;
+        if (www.error == null)
+        {
+            Texture2D texture = www.texture;
+            modelData.Texture = texture;
 
-        Texture2D texture = www.texture;
-        modelData.Texture = texture;
-
-        complete();
+            complete();
+        }
+        else
+        {
+            Debug.Log("WWW Image Error: " + www.error);
+        }
     }
     void complete()
     {

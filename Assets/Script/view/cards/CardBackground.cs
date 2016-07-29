@@ -13,7 +13,6 @@ public class CardBackground : MonoBehaviour {
         mouseUpCallBack += callback;
     }
 
-
     void OnMouseDown()
     {
         isMouseDown = true;
@@ -33,13 +32,6 @@ public class CardBackground : MonoBehaviour {
     void OnMouseUp()
     {
         isMouseDown = false;
-        /*
-        Vector3 vector = parentGameObject.transform.position;
-        vector.z = 0;
-        parentGameObject.transform.position = vector;
-
-        Card card = parentGameObject.GetComponent<Card>();
-        */
         mouseUpCallBack();
     }
     // Use this for initialization

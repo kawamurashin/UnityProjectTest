@@ -16,12 +16,9 @@ public class Card : MonoBehaviour {
         SpriteRenderer spriteRenderer = (SpriteRenderer)transform.GetComponent("SpriteRenderer");
         spriteRenderer.sprite = sprite;
 
-        Debug.Log(modelData.CardName);
-
         Transform child = this.transform.FindChild("New Text");
         TextMesh textMesh = (TextMesh)child.GetComponent(typeof(TextMesh));
         textMesh.text = modelData.CardName;
-
     }
     public void addMouseUpCallBack(CallBack callback)
     {
@@ -45,11 +42,9 @@ public class Card : MonoBehaviour {
         if(cardBackground.isMouseDown == false)
         {
             Vector3 vector = this.transform.position;
-            vector.x += 0.1f - 0.2f * Random.value;
-            vector.y += 0.1f - 0.2f * Random.value;
+            vector.x += 0.03f - 0.06f * Random.value;
+            vector.y += 0.03f - 0.06f * Random.value;
             this.transform.position = vector;
         }
-
     }
-
 }

@@ -6,11 +6,9 @@ public class ViewManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //
-
         GameObject gameObject;
         Card card;
         ModelData modelData;
-        Debug.Log("view manager start");
         ModelManager modelManager = ModelManager.Instance;
         List<ModelData> list = modelManager.List;
         //
@@ -35,15 +33,10 @@ public class ViewManager : MonoBehaviour {
             vector.y = minStageSize.y + _height * Random.value;
             gameObject.transform.position = vector;
             //
-
-            //
             cardList.Add(card);
-
         }
         sortCardList();
-
     }
-	
 	// Update is called once per frame
 	void Update () {
 	
@@ -81,7 +74,6 @@ public class ViewManager : MonoBehaviour {
             vector = card.transform.position;
             vector.z = 2.1f *n  - 2.1f * i;
             card.transform.position = vector;
-
         }
     }
 }
